@@ -1,0 +1,47 @@
+var StyledButton = React.createClass({
+  propTypes: {
+    // the StyledButton requires a clickHandler
+    clickHandler: React.PropTypes.func.Required,
+    // and I guess the text can be seen as required as well
+    text: React.PropTypes.string.required
+  },
+  render: function() {
+    // as you are sure you have a clickHandler, you can just reference it directly from the props
+    return <button type="button" onClick={this.props.clickHandler}>{this.props.text}</button>;
+  }
+});
+
+var MyForm = React.createClass({
+  getInitialState() {
+    return {
+      clicked: 0
+    };
+  },
+  click() {
+    this.setState({clicked: this.state.clicked+1});
+  	alert('ouch');
+  },
+  secondClickHandler() {
+    this.setState({clicked: 0});
+    alert(':(');
+  },
+  render() {
+    // your parent component simply sets which button  
+    return <fieldset>
+        <div>
+    	  <StyledButton clickHandler={this.click} text="Click me" /> 
+          { (this.state.clicked > 0) && <StyledButton clickHandler={this.secondClickHandler} text="Not again" /> }
+        </div>
+    </fieldset>;
+  }
+});
+
+ReactDOM.render(
+  <MyForm />,
+  document.getElementById('container')
+);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.2/react-dom.min.js"></script>
+<div id="container">
+    <!-- This element's contents will be replaced with your component. -->
+</div>
