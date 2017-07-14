@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+using Microsoft.SharePoint.Client;
+using OfficeDevPnP.Core;
+
+using System.Configuration;
+using System.Net.Http;
+using System.Web.Http;
+
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+
+            // https://gc123dev.sharepoint.com/
+
+            try
+            {
+                AuthenticationManager authMgr = new AuthenticationManager();
+                using (ClientContext ctx = authMgr.GetAppOnlyAuthenticatedContext(
+                    "https://gc123dev.sharepoint.com/",
+                   "b6a1b1ed-4640-4136-a0dc-22766620eadf",
+                    "S7ZSqrcc/EWAD57SMe9rgdNRjuPprXdogG57curLJ7U="
+
+                    ))
+                {
+                    var list = ctx.Web.Lists.GetByTitle("Tasks");
+                    var item = list.AddItem(new ListItemCreationInformation());
+                    item["Title"] = "max";
+                    item.Update();
+                    ctx.ExecuteQuery();
+                  //  return new HttpResponseMessage(System.Net.HttpStatusCode.Created);
+                }
+            }
+            catch(SystemException e)
+            {
+                // new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
+
+              //  Console.Write()
+            }
+
+
+
+        }
+    }
+}
+
