@@ -1,0 +1,37 @@
+
+1.Write a sum method which will work properly when invoked using either syntax below.
+
+console.log(sum(2,3));   // Outputs 5
+console.log(sum(2)(3));  // Outputs 5
+
+
+ function sum(x) {
+     if (arguments.length ==2 )
+	 {
+	 
+	 
+	 } else {
+	 
+	     return function(y) { return x + y }
+	 }
+}
+
+
+2. how to you clone an object?
+
+var obj = {a: 1, b:2}
+
+var objclone = Object.assign( {}, obj);
+
+let obj = {
+    a: 1,
+    b: 2,
+    c: {
+        age: 30
+    }
+};
+
+
+3.
+
+
